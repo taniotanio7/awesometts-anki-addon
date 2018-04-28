@@ -13,7 +13,7 @@
 # language governing permissions and limitations under the License.
 
 import sys
-import xml.etree.cElementTree
+import xml.etree.ElementTree
 import logging
 
 from botocore import ScalarTypes

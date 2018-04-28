@@ -169,8 +169,8 @@ if sys.version_info[:2] == (2, 6):
             category=exceptions.SecurityWarning,
             module=r".*urllib3\.connection")
 else:
-    import xml.etree.cElementTree
-    XMLParseError = xml.etree.cElementTree.ParseError
+    import xml.etree.ElementTree
+    XMLParseError = xml.etree.ElementTree.ParseError
     import json
 
     def filter_ssl_san_warnings():

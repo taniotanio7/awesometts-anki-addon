@@ -18,7 +18,7 @@ This module contains builtin handlers for events emitted by botocore.
 
 import base64
 import logging
-import xml.etree.cElementTree
+import xml.etree.ElementTree
 import copy
 import re
 import warnings
@@ -96,8 +96,8 @@ def check_for_200_error(response, **kwargs):
 
 def _looks_like_special_case_error(http_response):
     if http_response.status_code == 200:
-        parser = xml.etree.cElementTree.XMLParser(
-            target=xml.etree.cElementTree.TreeBuilder(),
+        parser = xml.etree.ElementTree.XMLParser(
+            target=xml.etree.ElementTree.TreeBuilder(),
             encoding='utf-8')
         parser.feed(http_response.content)
         root = parser.close()
@@ -517,8 +517,8 @@ def parse_get_bucket_location(parsed, http_response, **kwargs):
         # Response already set - a stub?
         return
     response_body = http_response.content
-    parser = xml.etree.cElementTree.XMLParser(
-        target=xml.etree.cElementTree.TreeBuilder(),
+    parser = xml.etree.ElementTree.XMLParser(
+        target=xml.etree.ElementTree.TreeBuilder(),
         encoding='utf-8')
     parser.feed(response_body)
     root = parser.close()

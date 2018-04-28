@@ -507,8 +507,8 @@ class ServiceDialog(Dialog):
                                                use_options)
 
         stack.setCurrentIndex(idx)
-        self.dependent_field=stack.widget(idx).findChild(QtWidgets.QComboBox, 'dependent_field')
-        self._combo_box_mapping(stack.widget(idx).findChild(QtWidgets.QComboBox, 'main_field').currentText())
+        self.dependent_field=stack.widget(idx).findChild(QtGui.QComboBox, 'dependent_field')
+        self._combo_box_mapping(stack.widget(idx).findChild(QtGui.QComboBox, 'main_field').currentText())
         if panel_unbuilt and not initial:
             self.adjustSize()
 
@@ -568,7 +568,7 @@ class ServiceDialog(Dialog):
                     vinput.setDisabled(True)
                 vinput.currentIndexChanged.connect(self._on_preset_reset)
                 if options.index(option)==0 and len(options)==2:
-                    vinput.currentTextChanged.connect(self._combo_box_mapping)
+                    vinput.editTextChanged.connect(self._combo_box_mapping)
             if(options.index(option)==0):
                 vinput.setObjectName("main_field")
             if(options.index(option)==1):
