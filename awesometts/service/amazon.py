@@ -83,7 +83,7 @@ class Amazon(Service):
 
     __slots__ = []
 
-    NAME = "AmazonPolly"
+    NAME = "Amazon Polly"
 
     TRAITS = [Trait.INTERNET]
 
@@ -116,7 +116,7 @@ class Amazon(Service):
                                                          value),
             ),
         ]
-    
+
     def extras(self):
         return [
             dict(
