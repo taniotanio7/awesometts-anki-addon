@@ -19,6 +19,13 @@
 
 """
 Service implementation for Amazon Polly
+
+In order for it to work, make sure that your AWS credentials are set, as
+described in here:
+https://boto3.readthedocs.io/en/latest/guide/quickstart.html#configuration
+
+We should probably allow users to enter the ACCESS_KEY and the SECRET_KEY from
+the UI, to make it more user friendly.
 """
 
 from re import compile as re_compile
