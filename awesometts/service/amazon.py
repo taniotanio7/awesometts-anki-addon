@@ -19,13 +19,6 @@
 
 """
 Service implementation for Amazon Polly
-
-In order for it to work, make sure that your AWS credentials are set, as
-described in here:
-https://boto3.readthedocs.io/en/latest/guide/quickstart.html#configuration
-
-We should probably allow users to enter the ACCESS_KEY and the SECRET_KEY from
-the UI, to make it more user friendly.
 """
 
 from re import compile as re_compile
@@ -129,10 +122,11 @@ class Amazon(Service):
                      values=[(name, "%s (%s %s)" % (name, gender, language))
                              for language, gender, name in VOICES],
                      transform=transform_voice)]
-
+    
     def extras(self):
-        """Provides input for AWS credentials."""
-        return [dict(key='accesskey', label="AWS Access Key"), dict(key='secretkey', label="AWS Secret Key")]
+        """Provides input for AWS credentials and lexicon names."""
+        return [dict(key='accesskey', label="AWS Access Key"), dict(key='secretkey', label="AWS Secret Key"),
+                dict(key='lexicons', label="Lexicons")]
 
     def run(self, text, options, path):
         """Send request to AWS API and then download mp3."""
@@ -141,10 +135,15 @@ class Amazon(Service):
             boto3_client = boto3.client('polly', aws_access_key_id=options['accesskey'], aws_secret_access_key=options['secretkey'])
         else:
             boto3_client = boto3.client('polly')
+        lexicons = []
+        if options['lexicons']:
+            lexicons = options['lexicons'].split(", ")
+        print(lexicons)
         response=boto3_client.synthesize_speech(
             OutputFormat='mp3',
             Text=text,
-            VoiceId=options['voice']
+            VoiceId=options['voice'],
+            LexiconNames=lexicons
         )
         if response and response['AudioStream']:
             with open(path, 'wb') as response_output:
