@@ -386,12 +386,12 @@ class Router(object):
 
         try:
             self._logger.debug("Call for '%s' w/ %s", svc_id, options)
-
+            svc_id, service, options = self._validate_service(svc_id, options)
+            print(service['name'])
             if not text:
                 raise ValueError("No speakable text is present")
-            if len(text) > 2000:
+            if len(text) > 2000 and service['name']!='Amazon Polly':
                 raise ValueError("Text to speak is too long")
-            svc_id, service, options = self._validate_service(svc_id, options)
             text = service['instance'].modify(text)
             if not text:
                 raise ValueError("Text not usable by " + service['class'].NAME)

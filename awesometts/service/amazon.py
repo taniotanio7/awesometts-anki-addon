@@ -23,14 +23,18 @@ Service implementation for Amazon Polly
 
 from re import compile as re_compile
 
-from .base import Service
-from .common import Trait
 import os
 import sys
+import platform
+from .base import Service
+from .common import Trait
 
 __all__ = ['Amazon']
 
-PATH_TO_BOTO3 = os.path.realpath(__file__).replace("service/amazon.py", "dependencies")
+if platform.system() == 'Windows':
+   PATH_TO_BOTO3 = os.path.realpath(__file__).replace("service\\amazon.py", "dependencies") 
+else: 
+    PATH_TO_BOTO3 = os.path.realpath(__file__).replace("service/amazon.py", "dependencies")
 sys.path.append(PATH_TO_BOTO3)
 
 import boto3

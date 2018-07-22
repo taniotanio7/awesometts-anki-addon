@@ -22,6 +22,7 @@ Path and directory initialization
 
 import os
 import tempfile
+import platform
 
 __all__ = [
     'ADDON',
@@ -45,7 +46,10 @@ BLANK = os.path.join(ADDON, 'blank.mp3')
 
 CACHE = os.path.join(ADDON, '.cache')
 
-ICONS = os.path.join(ADDON, 'gui/icons')
+if platform.system() == 'Windows':
+    ICONS = os.path.join(ADDON, 'gui\\icons')
+else: 
+    ICONS = os.path.join(ADDON, 'gui/icons')
 
 os.makedirs(CACHE, exist_ok=True)
 

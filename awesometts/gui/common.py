@@ -25,6 +25,7 @@ As everything done from the add-on code has to do with AwesomeTTS, these
 all carry a speaker icon (if supported by the desktop environment).
 """
 
+import platform
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import Qt
 
@@ -33,8 +34,10 @@ from ..paths import ICONS
 __all__ = ['ICON', 'key_event_combo', 'key_combo_desc', 'Action', 'Button',
            'Checkbox', 'Filter', 'HTML', 'Label', 'Note', 'HTMLButton']
 
-
-ICON_FILE = f'{ICONS}/speaker.png'
+if platform.system() == 'Windows':
+    ICON_FILE = f'{ICONS}\\speaker.png'
+else
+    ICON_FILE = f'{ICONS}/speaker.png'
 ICON = QtGui.QIcon(ICON_FILE)
 
 
