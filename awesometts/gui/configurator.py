@@ -100,7 +100,11 @@ class Configurator(Dialog):
                 (self._ui_tabs_advanced, 'configure', "Advanced"),
         ]:
             if use_icons:
-                tabs.addTab(content(), QtGui.QIcon(f'{ICONS}/{icon}.png'),
+                if platform.startswith('win'):
+                    tabs.addTab(content(), QtGui.QIcon(f'{ICONS}\\{icon}.png'),
+                            label)
+                else:
+                    tabs.addTab(content(), QtGui.QIcon(f'{ICONS}/{icon}.png'),
                             label)
             else:  # active tabs do not display correctly on Mac OS X w/ icons
                 tabs.addTab(content(), label)
@@ -520,7 +524,10 @@ class Configurator(Dialog):
     def _ui_tabs_advanced_update(self):
         """Returns the "Updates" input group."""
 
-        button = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}/find.png'), "Check Now")
+        if platform.startswith('win'):
+            button = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}\\find.png'), "Check Now")
+        else:
+            button = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}/find.png'), "Check Now")
         button.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         button.setObjectName('updates_button')
         button.clicked.connect(self._on_update_request)

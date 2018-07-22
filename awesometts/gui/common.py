@@ -36,7 +36,7 @@ __all__ = ['ICON', 'key_event_combo', 'key_combo_desc', 'Action', 'Button',
 
 if platform.system() == 'Windows':
     ICON_FILE = f'{ICONS}\\speaker.png'
-else
+else:
     ICON_FILE = f'{ICONS}/speaker.png'
 ICON = QtGui.QIcon(ICON_FILE)
 
@@ -352,7 +352,10 @@ class Slate(QtWidgets.QHBoxLayout):  # pylint:disable=too-few-public-methods
                               ("Move Selected Up", 'arrow-up'),
                               ("Move Selected Down", 'arrow-down'),
                               ("Remove Selected", 'editdelete')]:
-            btn = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}/{icon}.png'), "")
+            if platform.system() == 'Windows':
+                btn = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}\\{icon}.png'), "")
+            else:
+                btn = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}/{icon}.png'), "")
             btn.setIconSize(QtCore.QSize(16, 16))
             btn.setFlat(True)
             btn.setToolTip(tooltip)

@@ -18,6 +18,8 @@
 
 """Groups management dialog"""
 
+import platform
+
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 from ..paths import ICONS
@@ -60,15 +62,19 @@ class Groups(Dialog):
                              QtWidgets.QSizePolicy.Preferred)
         groups.activated.connect(self._on_group_activated)
 
-        # TODO: icons do not work with 2.1
-        delete = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}/editdelete.png'), "")
+        if platform.system().startswith('Windows'):
+            delete = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}\\editdelete.png'), "")
+        else:
+            delete = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}/editdelete.png'), "")
         delete.setObjectName('delete')
         delete.setIconSize(QtCore.QSize(16, 16))
         delete.setFixedSize(18, 18)
         delete.setFlat(True)
         delete.clicked.connect(self._on_group_delete)
-
-        add = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}/list-add.png'), "")
+        if platform.system().startswith('Windows'):
+            add = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}\\list-add.png'), "")
+        else:
+            add = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}/list-add.png'), "")
         add.setObjectName('add')
         add.setIconSize(QtCore.QSize(16, 16))
         add.setFixedSize(18, 18)

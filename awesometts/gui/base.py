@@ -24,6 +24,7 @@ use with AwesomeTTS.
 """
 
 import inspect
+import platform
 
 from PyQt5 import QtCore, QtWidgets, QtGui
 
@@ -325,8 +326,11 @@ class ServiceDialog(Dialog):
         dropdown.setSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding,
                                QtWidgets.QSizePolicy.Preferred)
         dropdown.activated.connect(self._on_preset_activated)
-
-        delete = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}/editdelete.png'), "")
+        
+        if platform.system() == 'Windows':
+            delete = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}\\editdelete.png'), "")
+        else:
+            delete = QtWidgets.QPushButton(QtGui.QIcon(f'{ICONS}/editdelete.png'), "")
         delete.setObjectName('presets_delete')
         delete.setIconSize(QtCore.QSize(16, 16))
         delete.setFixedSize(18, 18)
