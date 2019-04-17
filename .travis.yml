@@ -1,9 +1,12 @@
+sudo: required
+dist: xenial
 language: python
 
 python:
   - 3.6
+  - 3.7
 
-install: 
+install:
   - sudo apt-get update
   - sudo apt-get install portaudio19-dev xvfb mplayer lame git
   - pip install boto3
